@@ -47,6 +47,7 @@ class Encryptor
       supported_characters.count.times.collect do |attempt|
       decrypt(message,attempt)
       end
+      
     end
 
     # CONINUE OF http://tutorials.jumpstartlab.com/projects/encryptor.html
