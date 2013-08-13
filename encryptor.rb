@@ -1,9 +1,13 @@
 class Encryptor
+  def supported_characters
+    ('0'..'9').to_a + ('A'..'Z').to_a
+    # (' '..'z').to_a
+  end
 	def cipher(rotation)
-		chars = (' '..'z').to_a
+		chars = supported_characters
 		rotated_chars = chars.rotate(rotation)
 		Hash[chars.zip(rotated_chars)]
-  	end
+  end
   	def encrypt_letter(letter,rotation)
   		cipher(rotation)[letter]
   	end
@@ -38,6 +42,11 @@ class Encryptor
       # OR    decrypted_file = filename.gsub("encrypted", "decrypted")  -- alternate gsub methos for filename
       decrypted_file.write(results)      #Write out the text
       decrypted_file.close      #Close the file
+    end
+    def crack(message)
+      supported_characters.count.times.collect do |attempt|
+      decrypt(message,attempt)
+      end
     end
 
     # CONINUE OF http://tutorials.jumpstartlab.com/projects/encryptor.html
